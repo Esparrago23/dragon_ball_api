@@ -1,1 +1,14 @@
-<p>personajes-transformaciones works!</p>
+<div *ngIf="transformaciones.length > 0">
+    <h2>Transformaciones de {{ personajeName }}</h2>
+    <div class="card" *ngFor="let transformacion of transformaciones; let i = index">
+      <h3>{{ transformacion.name }}</h3>
+      <p><strong>Ki:</strong> {{ transformacion.ki }}</p>
+      <input type="number" [(ngModel)]="transformacion.ki" placeholder="Nuevo Ki" min="1"/>
+      <button (click)="updateKi(i, transformacion.ki)">Guardar Ki</button>
+    </div>
+  </div>
+  <div>
+    <button (click)="anteriorPersonaje()" [disabled]="currentIndex === 0"> Anterior </button>
+    <button (click)="siguientePersonaje()" [disabled]="currentIndex === personajes.length - 1"> Siguiente </button>
+  </div>
+  
