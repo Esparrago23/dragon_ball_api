@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PersonajeService } from '../services/personajes.service';
+import { Router } from '@angular/router';
+import { Personaje } from '../models/personaje';
 
 @Component({
   selector: 'app-personajes-transformaciones',
@@ -13,9 +15,11 @@ export class PersonajesTransformacionComponent implements OnInit {
   personajes: any[] = [];
   currentIndex: number = 0;
   personajeId: number = 0; 
+  @Input() recordatorioCreado!: Personaje;
   constructor(
     private route: ActivatedRoute,
-    private personajesService: PersonajeService
+    private personajesService: PersonajeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -83,4 +87,24 @@ export class PersonajesTransformacionComponent implements OnInit {
       this.actualizarPersonajeActual();
     }
   }
+
+
+  VerPersonaje(): void {
+    this.router.navigate(['/Personajes']);
+  }
+  
+  modalAbierto = false;
+  personajeSeleccionado!: Personaje;
+  abrirModal(personaje: Personaje) {
+    console.log(personaje)
+    this.personajeSeleccionado = { ...personaje };
+
+    this.modalAbierto = true;
+  }
+
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
+
+
 }

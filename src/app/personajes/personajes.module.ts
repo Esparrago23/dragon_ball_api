@@ -4,6 +4,7 @@ import { PersonajesCardsComponent } from './personajes-cards/personajes-cards.co
 import { PersonajesTransformacionComponent } from './personajes-transformaciones/personajes-transformaciones.component';
 import { PersonajesPlanetaComponent } from './personajes-planeta/personajes-planeta.component';
 import { FormsModule } from '@angular/forms';
+import { PersonajesEditarComponent } from './personajes-editar/personajes-editar.component';
 
 
 
@@ -11,7 +12,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     PersonajesCardsComponent,
     PersonajesTransformacionComponent,
-    PersonajesPlanetaComponent
+    PersonajesPlanetaComponent,
+    PersonajesEditarComponent
   ],
   imports: [
     CommonModule,
