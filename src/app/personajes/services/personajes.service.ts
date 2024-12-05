@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Characters } from '../models/characters';
-
+import { Planeta } from '../models/Planeta';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +16,8 @@ export class PersonajeService {
 
   getCharacterById(id: number): Observable<any> {
     return this._http.get<any>(`${this.url_base}/${id}`);
+  }
+  obtenerPlanetaPorId(id: number): Observable<Planeta> {
+    return this._http.get<Planeta>(`${this.url_base}/${id}`);
   }
 }

@@ -1,28 +1,47 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PersonajeService } from '../services/personajes.service';
 import { Router } from '@angular/router';
 import { Personaje } from '../models/personaje';
+import { Transformacion } from '../models/transformations';
 
 @Component({
   selector: 'app-personajes-transformaciones',
   templateUrl: './personajes-transformaciones.component.html',
-  styleUrl: './personajes-transformaciones.component.css'
+  styleUrls: ['./personajes-transformaciones.component.css']
 })
 export class PersonajesTransformacionComponent implements OnInit {
-  transformaciones: any[] = [];
+  transformaciones: Transformacion[] = [];
   personajeName: string = '';
-  personajes: any[] = [];
+  personajes: Personaje[] = [];
   currentIndex: number = 0;
-  personajeId: number = 0; 
-  @Input() recordatorioCreado!: Personaje;
+  personajeId: number = 0;
+  modalAbierto = false;
+  personajeSeleccionado: Personaje ={
+    id:0,
+    name:"",
+    ki:"",
+    maxKi:"",
+    race:"",
+    gender:"",
+    description:"",
+    image:"",
+    affiliation:"",
+    deletedAt:""
+  };
+
   constructor(
     private route: ActivatedRoute,
     private personajesService: PersonajeService,
     private router: Router
   ) {}
-
+  id: number=1;;
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('id');
+      this.id = idParam ? +idParam : 1; // Convierte el id a número
+      console.log('ID recibido:', this.id);
+    });
     this.cargarPersonajes();
   }
 
@@ -32,7 +51,8 @@ export class PersonajesTransformacionComponent implements OnInit {
         this.personajes = data.items;
         if (this.personajes.length > 0) {
           this.currentIndex = 0;
-          this.actualizarPersonajeActual();
+         
+          this.cargarTransformaciones(this.id);
         }
       },
       (error) => console.error('Error al cargar personajes:', error)
@@ -63,48 +83,28 @@ export class PersonajesTransformacionComponent implements OnInit {
     }
   }
 
-  updateKi(index: number, newKi: number): void {
-    if (newKi <= 0) {
-      alert('El Ki debe ser mayor a 0.');
-      return;
-    }
-    this.transformaciones[index].ki = newKi;
-    localStorage.setItem(`transformaciones_personaje_${this.personajeId}`, JSON.stringify(this.transformaciones));
-
-    alert('Ki actualizado correctamente.');
+  abrirModal(transformacion: any): void {
+    this.personajeSeleccionado = { ...transformacion };
+    this.modalAbierto = true;
   }
 
-  siguientePersonaje(): void {
-    if (this.currentIndex < this.personajes.length - 1) {
-      this.currentIndex++;
-      this.actualizarPersonajeActual();
-    }
+  cerrarModal(): void {
+    this.modalAbierto = false;
   }
 
-  anteriorPersonaje(): void {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.actualizarPersonajeActual();
+  guardarTransformacionActualizada(transformacionActualizada: any): void {
+    const index = this.transformaciones.findIndex(t => t.name === transformacionActualizada.name);
+    if (index > -1) {
+      this.transformaciones[index] = transformacionActualizada;
+      localStorage.setItem(`transformaciones_personaje_${this.personajeId+1}`, JSON.stringify(this.transformaciones));
+      alert('Transformación actualizada correctamente.');
     }
+    this.cerrarModal();
   }
 
 
   VerPersonaje(): void {
+    localStorage.removeItem(`transformaciones_personaje_${this.id}`);
     this.router.navigate(['/Personajes']);
   }
-  
-  modalAbierto = false;
-  personajeSeleccionado!: Personaje;
-  abrirModal(personaje: Personaje) {
-    console.log(personaje)
-    this.personajeSeleccionado = { ...personaje };
-
-    this.modalAbierto = true;
-  }
-
-  cerrarModal() {
-    this.modalAbierto = false;
-  }
-
-
 }
