@@ -1,19 +1,15 @@
-<div *ngIf="transformaciones.length > 0">
-  <h2>Transformaciones de {{ personajeName }}</h2>
-  <div class="card" *ngFor="let transformacion of transformaciones; let i = index">
-    <h3>{{ transformacion.name }}</h3>
-    <p><strong>Ki:</strong> {{ transformacion.ki }}</p>
-    <button (click)="abrirModal(transformacion)">Editar</button>
+<div *ngIf="transformaciones.length > 0" class="mt-4">
+  <h2 class="text-xl font-semibold">Transformaciones de {{ personajeName }}</h2>
+  <div class="card space-y-4 mt-4" *ngFor="let transformacion of transformaciones; let i = index">
+      <h3 class="text-lg font-semibold">{{ transformacion.name }}</h3>
+      <p class="text-sm text-gray-600"><strong>Ki:</strong> {{ transformacion.ki }}</p>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600" (click)="abrirModal(transformacion)">Editar</button>
   </div>
 </div>
-
-
-
-<button (click)="VerPersonaje()">Ver Personajes</button>
-
+<button class="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600 mt-4" (click)="VerPersonaje()">Ver Personajes</button>
 <app-personajes-editar
-  *ngIf="modalAbierto"
-  [transformacion]="personajeSeleccionado"
-  (cerrar)="cerrarModal()"
-  (guardar)="guardarTransformacionActualizada($event)"
+*ngIf="modalAbierto"
+[transformacion]="personajeSeleccionado"
+(cerrar)="cerrarModal()"
+(guardar)="guardarTransformacionActualizada($event)"
 ></app-personajes-editar>
