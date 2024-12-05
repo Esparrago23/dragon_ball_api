@@ -1,1 +1,23 @@
-<p>personajes-cards works!</p>
+<div class=" ">
+    <div class="flex p-3.5 items-center"  *ngFor="let personaje of personajes">
+        <div class=" w-32 h-46 flex-shrink-0">
+            <img class="w-full h-full object-cover  " [src]="personaje.image" alt="{{ personaje.name }}" />
+        </div>
+        <div>
+            <h3>{{ personaje.name }}</h3>
+            <p><strong>Race:</strong> {{ personaje.race }}</p>
+            <p><strong>Gender:</strong> {{ personaje.gender }}</p>
+        <p><strong>Ki:</strong> {{ personaje.ki }} / {{ personaje.maxKi }}</p>
+        <p><strong>Affiliation:</strong> {{ personaje.affiliation }}</p>
+        <p><strong>Description:</strong> {{ personaje.description }}</p>
+        </div>
+        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="verTransformaciones(personaje.id)">Ver Transformaciones</button>
+        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="abrirModal(personaje.id)">Ver Planeta</button>
+    </div>
+ </div>
+  
+
+ <div *ngIf="modalAbierto">
+        <app-planetas [personajeid]="personajeID"></app-planetas>
+        <button class="bg-gray-400 w-[60px] h-[40pz] fixed top-[80%] left-[50%] flex items-center flex-col" (click)="cerrarModal()">Cerrar</button>
+ </div>
