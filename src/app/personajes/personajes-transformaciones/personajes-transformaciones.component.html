@@ -1,19 +1,28 @@
 <div *ngIf="transformaciones.length > 0">
-  <h2>Transformaciones de {{ personajeName }}</h2>
-  <div class="card" *ngFor="let transformacion of transformaciones; let i = index">
-    <h3>{{ transformacion.name }}</h3>
-    <p><strong>Ki:</strong> {{ transformacion.ki }}</p>
-    <button (click)="abrirModal(transformacion)">Editar</button>
+  <h2 class="text-2xl font-bold text-orange-600 mb-4">Transformaciones de {{ personajeName }}</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-orange-100 border border-orange-300 rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow" *ngFor="let transformacion of transformaciones; let i = index">
+      <div class="w-full h-40 mb-4 pl-40">
+        <img class="w-1/4 h-full object-cover rounded-md" [src]="transformacion.image" alt="{{ transformacion.name }}" />
+      </div>
+      <h3 class="text-lg font-semibold text-orange-700">{{ transformacion.name }}</h3>
+      <p class="text-sm text-orange-600"><strong>Ki:</strong> {{ transformacion.ki }}</p>
+      <button class="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-orange-600 transition-colors w-full" (click)="abrirModal(transformacion)">Editar</button>
+    </div>
   </div>
 </div>
 
-
-
-<button (click)="VerPersonaje()">Ver Personajes</button>
+<button class="bg-orange-500 text-white px-6 py-2 rounded-lg mt-6 hover:bg-orange-600 transition-colors" (click)="VerPersonaje()">Ver Personajes</button>
 
 <app-personajes-editar
   *ngIf="modalAbierto"
   [transformacion]="personajeSeleccionado"
   (cerrar)="cerrarModal()"
   (guardar)="guardarTransformacionActualizada($event)"
-></app-personajes-editar>
+  class="fixed inset-0 bg-orange-900 bg-opacity-50 flex items-center justify-center"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+    <app-personajes-editar [transformacion]="personajeSeleccionado"></app-personajes-editar>
+    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-orange-600 transition-colors w-full" (click)="cerrarModal()">Cerrar</button>
+  </div>
+</app-personajes-editar>

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
 import { PlanetaService } from '../services/planeta.service';
-
+import { Planeta } from '../../personajes/models/Planeta';
 @Component({
   standalone: false,
   selector: 'app-planetas',
@@ -9,7 +9,8 @@ import { PlanetaService } from '../services/planeta.service';
 })
 export class PlanetasComponent implements OnInit {
  @Input() personajeid! : number;
- planeta: any
+ planeta!: Planeta;
+ @Output() cerrar = new EventEmitter<void>();
 
   constructor(private planetaService: PlanetaService) {}
   
@@ -24,4 +25,8 @@ export class PlanetasComponent implements OnInit {
       this.planeta = data.originPlanet;
     });
   }
+  cerrarModal(): void {
+    this.cerrar.emit();
+  }
+  
 }

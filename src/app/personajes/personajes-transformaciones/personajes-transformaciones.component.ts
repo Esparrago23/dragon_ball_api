@@ -39,7 +39,7 @@ export class PersonajesTransformacionComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');
-      this.id = idParam ? +idParam : 1; // Convierte el id a número
+      this.id = idParam ? +idParam : 1;
       console.log('ID recibido:', this.id);
     });
     this.cargarPersonajes();
@@ -104,7 +104,6 @@ export class PersonajesTransformacionComponent implements OnInit {
 
 
   VerPersonaje(): void {
-    localStorage.removeItem(`transformaciones_personaje_${this.id}`);
     this.router.navigate(['/Personajes']);
   }
 }

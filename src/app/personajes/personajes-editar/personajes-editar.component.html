@@ -1,20 +1,18 @@
-
 <div class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-
-
   <div class="bg-orange-300 rounded-lg shadow-lg w-full max-w-sm p-6 relative mx-4 flex flex-col">
-      
     <h2 class="text-xl font-bold text-center mb-4">Editar Transformación</h2>
-    <label for="name">Nombre:</label>
-    <input id="name" [(ngModel)]="transformacion.name" type="text" readonly  />
-    <label for="link">link:</label>
-    <input id="link" [(ngModel)]="transformacion.image" type="text" readonly />
-    <label for="ki">Ki:</label>
-    <input id="ki" [(ngModel)]="ki" type="number" min="1" />
-
-    <div class="modal-actions">
-      <button (click)="guardarCambios()">Guardar</button>
-      <button (click)="cerrarModal()">Cancelar</button>
+    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre:</label>
+    <input id="name" [(ngModel)]="transformacion.name" type="text" readonly class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    
+    <label for="link" class="block text-sm font-medium text-gray-700 mt-4 mb-1">Link:</label>
+    <input id="link" [(ngModel)]="transformacion.image" type="text" readonly class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    
+    <label for="ki" class="block text-sm font-medium text-gray-700 mt-4 mb-1">Ki:</label>
+    <input id="ki" [(ngModel)]="ki" type="number" min="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    
+    <div class="mt-6 flex justify-end space-x-4">
+      <button (click)="guardarCambios()" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">Guardar</button>
+      <button (click)="cerrarModal()" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">Cancelar</button>
     </div>
   </div>
 </div>
