@@ -5,7 +5,8 @@ import { PersonajeService } from '../services/personajes.service';
 @Component({
   selector: 'app-personajes-transformaciones',
   templateUrl: './personajes-transformaciones.component.html',
-  styleUrl: './personajes-transformaciones.component.css'
+  styleUrl: './personajes-transformaciones.component.css',
+  standalone: false
 })
 export class PersonajesTransformacionComponent implements OnInit {
   transformaciones: any[] = [];

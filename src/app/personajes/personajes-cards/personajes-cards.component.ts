@@ -6,12 +6,14 @@ import { PersonajeService } from '../services/personajes.service';
 import { Characters } from '../models/characters';
 import { Router } from '@angular/router';
 @Component({
+  standalone: false,
   selector: 'app-personajes-cards',
   templateUrl: './personajes-cards.component.html',
   styleUrl: './personajes-cards.component.css'
 })
 export class PersonajesCardsComponent implements OnInit{
 personajes:Personaje[]=[];
+showModal: boolean = false;
 meta: Meta = {
   totalItems: 0,
   itemCount: 0,
@@ -44,5 +46,12 @@ verTransformaciones(id: number): void {
   this.router.navigate(['/transformaciones', id]);
 }
 
+verModal(): void{
+  this.showModal = true
+}
+
+cerrarModal(): void{
+  this.showModal = false
+}
 
 }
