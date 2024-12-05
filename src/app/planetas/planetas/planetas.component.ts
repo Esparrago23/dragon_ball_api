@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PlanetaService } from '../services/planeta.service';
 
 @Component({
@@ -8,12 +8,20 @@ import { PlanetaService } from '../services/planeta.service';
   styleUrl: './planetas.component.css'
 })
 export class PlanetasComponent implements OnInit {
+ @Input() personajeid! : number;
+ planeta: any
 
   constructor(private planetaService: PlanetaService) {}
+  
   ngOnInit(): void {
-      this.cargarPlaneta();
+    if (this.personajeid) {
+      this.cargarPlaneta(this.personajeid);
+    }
   }
-  cargarPlaneta(): void{
-    this.planetaService
+  
+  cargarPlaneta(id: number): void {
+    this.planetaService.getCharacterById(id).subscribe((data) => {
+      this.planeta = data.originPlanet;
+    });
   }
 }

@@ -12,7 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './personajes-cards.component.css'
 })
 export class PersonajesCardsComponent implements OnInit{
-personajes:Personaje[]=[];
+  modalAbierto = false;
+  personajes:Personaje[]=[];
+  personajeID!: number;
 showModal: boolean = false;
 meta: Meta = {
   totalItems: 0,
@@ -45,13 +47,14 @@ verTransformaciones(id: number): void {
   console.log('ID del personaje:', id);
   this.router.navigate(['/transformaciones', id]);
 }
-
-verModal(): void{
-  this.showModal = true
+abrirModal(id: number): void {
+  this.personajeID = id;
+  this.modalAbierto = true;
 }
 
-cerrarModal(): void{
-  this.showModal = false
+cerrarModal(): void {
+  this.modalAbierto = false;
 }
+
 
 }

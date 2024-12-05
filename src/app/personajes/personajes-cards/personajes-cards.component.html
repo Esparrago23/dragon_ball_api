@@ -12,12 +12,12 @@
         <p><strong>Description:</strong> {{ personaje.description }}</p>
         </div>
         <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="verTransformaciones(personaje.id)">Ver Transformaciones</button>
-        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="verModal()">Ver Planeta</button>
+        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="abrirModal(personaje.id)">Ver Planeta</button>
     </div>
  </div>
   
 
- <div *ngIf="showModal">
-        <app-planetas></app-planetas>
+ <div *ngIf="modalAbierto">
+        <app-planetas [personajeid]="personajeID"></app-planetas>
         <button class="bg-gray-400 w-[60px] h-[40pz] fixed top-[80%] left-[50%] flex items-center flex-col" (click)="cerrarModal()">Cerrar</button>
  </div>
