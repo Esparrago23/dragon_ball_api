@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonajesCardsComponent } from './personajes-cards/personajes-cards.component';
 import { PersonajesTransformacionComponent } from './personajes-transformaciones/personajes-transformaciones.component';
-import { PersonajesPlanetaComponent } from './personajes-planeta/personajes-planeta.component';
 import { FormsModule } from '@angular/forms';
+import { PlanetasModule } from '../planetas/planetas.module';
 import { PersonajesEditarComponent } from './personajes-editar/personajes-editar.component';
 
 
@@ -12,17 +12,16 @@ import { PersonajesEditarComponent } from './personajes-editar/personajes-editar
   declarations: [
     PersonajesCardsComponent,
     PersonajesTransformacionComponent,
-    PersonajesPlanetaComponent,
     PersonajesEditarComponent
   ],
   imports: [
     CommonModule,
-    FormsModule
-  ],
+    FormsModule,
+    PlanetasModule
+],
   exports:[
     PersonajesCardsComponent,
-    PersonajesTransformacionComponent,
-    PersonajesPlanetaComponent
+    PersonajesTransformacionComponent
   ]
 })
 export class PersonajesModule { }

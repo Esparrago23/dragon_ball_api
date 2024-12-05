@@ -1,18 +1,27 @@
-<div class=" ">
-    <div class="flex p-3.5 items-center"  *ngFor="let personaje of personajes">
-        <div class=" w-32 h-46 flex-shrink-0">
-            <img class="w-full h-full object-cover  " [src]="personaje.image" alt="{{ personaje.name }}" />
-        </div>
-        <div>
-            <h3>{{ personaje.name }}</h3>
-            <p><strong>Race:</strong> {{ personaje.race }}</p>
-            <p><strong>Gender:</strong> {{ personaje.gender }}</p>
-        <p><strong>Ki:</strong> {{ personaje.ki }} / {{ personaje.maxKi }}</p>
-        <p><strong>Affiliation:</strong> {{ personaje.affiliation }}</p>
-        <p><strong>Description:</strong> {{ personaje.description }}</p>
-        </div>
-        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="verTransformaciones(personaje.id)">Ver Transformaciones</button>
-        <button class=" bg-gray-500 w-max h-max flex justify-center rounded-xl" (click)="abrirModal(personaje.id)">Ver Planeta</button>
+<div class="">
+    <div class="flex p-4 items-center gap-4 bg-orange-100 rounded-lg shadow-md hover:shadow-lg transition-shadow" *ngFor="let personaje of personajes">
+      <div class="w-32 h-46 flex-shrink-0">
+        <img class="w-full h-full object-cover rounded-md border border-orange-300" [src]="personaje.image" alt="{{ personaje.name }}" />
+      </div>
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-orange-800">{{ personaje.name }}</h3>
+        <p class="text-sm text-orange-600"><strong>Race:</strong> {{ personaje.race }}</p>
+        <p class="text-sm text-orange-600"><strong>Gender:</strong> {{ personaje.gender }}</p>
+        <p class="text-sm text-orange-600"><strong>Ki:</strong> {{ personaje.ki }} / {{ personaje.maxKi }}</p>
+        <p class="text-sm text-orange-600"><strong>Affiliation:</strong> {{ personaje.affiliation }}</p>
+        <p class="text-sm text-orange-600"><strong>Description:</strong> {{ personaje.description }}</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-600 transition-colors" (click)="verTransformaciones(personaje.id)">Ver Transformaciones</button>
+        <button class="bg-orange-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-800 transition-colors" (click)="abrirModal(personaje.id)">Ver Planeta</button>
+      </div>
     </div>
- </div>
+  </div>
+  
+  <div *ngIf="modalAbierto" class="fixed inset-0 bg-orange-900 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <app-planetas [personajeid]="personajeID" (cerrar)="cerrarModal()"></app-planetas>
+      <button class="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-orange-600 transition-colors w-full" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
   
