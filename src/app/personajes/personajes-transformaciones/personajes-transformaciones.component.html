@@ -1,12 +1,17 @@
-<div *ngIf="transformaciones.length > 0" class="mt-4">
-  <h2 class="text-xl font-semibold">Transformaciones de {{ personajeName }}</h2>
-  <div class="card space-y-4 mt-4" *ngFor="let transformacion of transformaciones; let i = index">
-      <h3 class="text-lg font-semibold">{{ transformacion.name }}</h3>
-      <p class="text-sm text-gray-600"><strong>Ki:</strong> {{ transformacion.ki }}</p>
-      <button class="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600" (click)="abrirModal(transformacion)">Editar</button>
+<div *ngIf="transformaciones.length > 0" class="flex h-[40vh] w-full flex-col ">
+  <h2 class="text-xl w-full text-center font-semibold p-3">Transformaciones de {{ personajeName }}</h2>
+  <div class="flex  w-full flex-wrap justify-evenly">
+    <div class="flex border border-black w-3/12 mx-3 p-3 my-3" *ngFor="let transformacion of transformaciones; let i = index">
+        <h3 class="text-lg font-semibold">{{ transformacion.name }}</h3>
+        <p class="text-sm text-gray-600"><strong>Ki:</strong> {{ transformacion.ki }}</p>
+        <button class="bg-blue-500  text-white px-4 py-2 rounded-xl hover:bg-blue-600" (click)="abrirModal(transformacion)">Editar</button>
+    </div>
   </div>
 </div>
-<button class="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600 mt-4" (click)="VerPersonaje()">Ver Personajes</button>
+<div class="w-full flex justify-center">
+  <button class="bg-green-500 text-white px-6 py-3 rounded-xl hover:bg-green-600 mt-4" (click)="VerPersonaje()">Ver Personajes</button>
+
+</div>
 <app-personajes-editar
 *ngIf="modalAbierto"
 [transformacion]="personajeSeleccionado"
